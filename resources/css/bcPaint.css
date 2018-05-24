@@ -1,0 +1,8 @@
+#bcPaint{
+  width: 100%;
+  text-align: center;
+}
+
+#bcPaintCanvas{
+  border: 1px solid #ddd;
+}
