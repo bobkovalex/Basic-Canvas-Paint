@@ -1,8 +1,37 @@
 #bcPaint{
+  width: 600px;
+  height: 400px;
+  margin: auto;
+}
+
+.bcPaint-container{
   width: 100%;
+  height: 100%;
+}
+
+.bcPaint-header{
+  width: 100%;
+  height: 25px;
+}
+
+.bcPaint-palette{
   text-align: center;
 }
 
-#bcPaintCanvas{
-  border: 1px solid #ddd;
+.bcPaint-palette-color{
+  width: 15px;
+  height: 15px;
+  display: inline-block;
+  cursor: pointer;
+  border-radius: 15px;
+  margin: 0 5px;
+}
+
+.bcPaint-canvas-container{
+  width: 100%;
+  height: calc(100% - 25px);
+}
+
+.bcPaint-canvas-container > canvas{
+  border: 1px solid #696969;
 }
