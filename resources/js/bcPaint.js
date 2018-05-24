@@ -3,7 +3,7 @@
  * Copyright (c) 2018 Alex Bobkov <lilalex85@gmail.com>
  * Licensed under MIT
  * @author Alexandr Bobkov
- * @version 0.5.1
+ * @version 0.6.0
  */
 
 $(document).ready(function(){
@@ -12,8 +12,7 @@ $(document).ready(function(){
 	});
 
 	$('body').on('click', '#bcPaint-reset', function(){
-		$.fn.bcPaint.removePane();
-		$.fn.bcPaint.addPane();
+		$.fn.bcPaint.clearCanvas();
 	});
 
 	$('body').on('click', '#bcPaint-export', function(){
@@ -40,27 +39,16 @@ $(document).ready(function(){
 							buttonSave		: $('<button id="bcPaint-export">Export</button>')
 						},
 		paintCanvas,
-		paintContext,
-		rootElement;
+		paintContext;
 
 	/**
 	* Assembly and initialize plugin
 	**/
 	$.fn.bcPaint = function (options) {
-		rootElement = $(this);
-		$.fn.bcPaint.addPane(options);
-	}
 
-	/**
-	* Extend plugin
-	**/
-	$.extend(true, $.fn.bcPaint, {
-
-		/**
-		* Assembly pane
-		*/
-		addPane : function(options){
-			var colorSet		= $.extend({}, $.fn.bcPaint.defaults, options),
+		return this.each(function () {
+			var rootElement 	= $(this),
+				colorSet		= $.extend({}, $.fn.bcPaint.defaults, options),
 				defaultColor	= (rootElement.val().length > 0) ? rootElement.val() : colorSet.defaultColor,
 				container 		= templates.container.clone(),
 				header 			= templates.header.clone(),
@@ -134,7 +122,13 @@ $(document).ready(function(){
 			    e.preventDefault();
 			  }
 			}, false);
-		},
+		});
+	}
+
+	/**
+	* Extend plugin
+	**/
+	$.extend(true, $.fn.bcPaint, {
 
 		dispatchMouseEvent : function(e, mouseAction){
 			var touch = e.touches[0];
@@ -151,8 +145,9 @@ $(document).ready(function(){
 		/**
 		* Remove pane
 		*/
-		removePane : function(){
-			$('#bcPaint-container').remove();
+		clearCanvas : function(){
+			paintCanvas.width = paintCanvas.width;
+			//$('#bcPaint-container').remove();
 		},
 
 		/**

@@ -1,2 +1,2 @@
 # Basic Canvas Paint
-##### v0.5.1
+##### v0.6.0
