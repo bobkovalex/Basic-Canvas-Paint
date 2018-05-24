@@ -1,20 +1,14 @@
-#bcPaint{
-  width: 600px;
-  height: 400px;
-  margin: auto;
-}
-
-.bcPaint-container{
+#bcPaint-container{
   width: 100%;
   height: 100%;
 }
 
-.bcPaint-header{
+#bcPaint-header{
   width: 100%;
   height: 25px;
 }
 
-.bcPaint-palette{
+#bcPaint-palette{
   text-align: center;
 }
 
@@ -27,11 +21,29 @@
   margin: 0 5px;
 }
 
-.bcPaint-canvas-container{
+#bcPaint-canvas-container{
   width: 100%;
-  height: calc(100% - 25px);
+  height: calc(100% - 50px);
 }
 
-.bcPaint-canvas-container > canvas{
+#bcPaint-canvas-container > canvas{
   border: 1px solid #696969;
+}
+
+#bcPaint-bottom{
+  width: 100%;
+  height: 25px;
+  text-align: center;
+}
+
+#bcPaint-bottom > button{
+  background-color: #3e4e5a;
+  color: #ffffff;
+  text-transform: uppercase;
+  border: 0;
+  font-size: 10px;
+  padding: 5px 10px;
+  margin-left: 10px;
+  margin-top: 10px;
+  outline: none;
 }

@@ -3,12 +3,21 @@
  * Copyright (c) 2018 Alex Bobkov <lilalex85@gmail.com>
  * Licensed under MIT
  * @author Alexandr Bobkov
- * @version 0.2.0
+ * @version 0.3.0
  */
 
 $(document).ready(function(){
-	$('.bcPaint-palette').on('click', '.bcPaint-palette-color', function(){
+	$('body').on('click', '.bcPaint-palette-color', function(){
 		$.fn.bcPaint.setColor($(this).css('background-color'));
+	});
+
+	$('body').on('click', '#bcPaint-reset', function(){
+		$.fn.bcPaint.removePane();
+		$.fn.bcPaint.addPane();
+	});
+
+	$('body').on('click', '#bcPaint-export', function(){
+		$.fn.bcPaint.export();
 	});
 });
 
@@ -20,64 +29,26 @@ $(document).ready(function(){
 	var isDragged		= false,
 		startPoint		= { x:0, y:0 },
 		templates 		= {
-							container : $('<div class="bcPaint-container"></div>'),
-							header : $('<div class="bcPaint-header"></div>'),
-							palette : $('<div class="bcPaint-palette"></div>'),
-							color : $('<div class="bcPaint-palette-color"></div>'),
-							canvasContainer : $('<div class="bcPaint-canvas-container"></div>'),
-							canvasPane : $('<canvas id="bcPaintCanvas"></canvas>')
+							container 		: $('<div id="bcPaint-container"></div>'),
+							header 			: $('<div id="bcPaint-header"></div>'),
+							palette 		: $('<div id="bcPaint-palette"></div>'),
+							color 			: $('<div class="bcPaint-palette-color"></div>'),
+							canvasContainer : $('<div id="bcPaint-canvas-container"></div>'),
+							canvasPane 		: $('<canvas id="bcPaintCanvas"></canvas>'),
+							bottom 			: $('<div id="bcPaint-bottom"></div>'),
+							buttonReset 	: $('<button id="bcPaint-reset">Reset</button>'),
+							buttonSave		: $('<button id="bcPaint-export">Export</button>')
 						},
-		paintContext;
+		paintCanvas,
+		paintContext,
+		rootElement;
 
 	/**
 	* Assembly and initialize plugin
 	**/
 	$.fn.bcPaint = function (options) {
-
-		return this.each(function () {
-			var elem 			= $(this),
-				colorSet		= $.extend({}, $.fn.bcPaint.defaults, options),
-				defaultColor	= (elem.val().length > 0) ? elem.val() : colorSet.defaultColor,
-				container 		= templates.container.clone(),
-				header 			= templates.header.clone(),
-				palette 		= templates.palette.clone(),
-				canvasContainer = templates.canvasContainer.clone(),
-				canvasPane 		= templates.canvasPane.clone(),
-				color;
-
-			// assembly canvas pane
-			elem.append(container);
-			container.append(header);
-			container.append(canvasContainer);
-			header.append(palette);
-			canvasContainer.append(canvasPane);
-
-			// assembly color palette
-			$.each(colorSet.colors, function (i) {
-        		color = templates.color.clone();
-				color.css('background-color', colorSet.colors[i]);
-				palette.append(color);
-    		});
-
-			// set width and height
-			var bcCanvas = elem.find('canvas');
-			var bcCanvasContainer = elem.find('.bcPaint-canvas-container');
-			bcCanvas.attr('width', bcCanvasContainer.width());
-			bcCanvas.attr('height', bcCanvasContainer.height());
-
-			// initialize canvas pane
-			var paintCanvas = document.getElementById('bcPaintCanvas');
-			paintContext = paintCanvas.getContext('2d');
-
-			// set color
-			$.fn.bcPaint.setColor(defaultColor);
-
-			// bind mouse actions
-			paintCanvas.onmousedown = $.fn.bcPaint.paintMouseDown;
-			paintCanvas.onmouseup = $.fn.bcPaint.paintMouseUp;
-			paintCanvas.onmousemove = $.fn.bcPaint.paintMouseMove;
-		});
-		
+		rootElement = $(this);
+		$.fn.bcPaint.addPane(options);
 	}
 
 	/**
@@ -86,9 +57,68 @@ $(document).ready(function(){
 	$.extend(true, $.fn.bcPaint, {
 
 		/**
+		* Assembly pane
+		*/
+		addPane : function(options){
+			var colorSet		= $.extend({}, $.fn.bcPaint.defaults, options),
+				defaultColor	= (rootElement.val().length > 0) ? rootElement.val() : colorSet.defaultColor,
+				container 		= templates.container.clone(),
+				header 			= templates.header.clone(),
+				palette 		= templates.palette.clone(),
+				canvasContainer = templates.canvasContainer.clone(),
+				canvasPane 		= templates.canvasPane.clone(),
+				bottom 			= templates.bottom.clone(),
+				buttonReset 	= templates.buttonReset.clone(),
+				buttonSave 		= templates.buttonSave.clone(),
+				color;
+
+			// assembly pane
+			rootElement.append(container);
+			container.append(header);
+			container.append(canvasContainer);
+			container.append(bottom);
+			header.append(palette);
+			canvasContainer.append(canvasPane);
+			bottom.append(buttonReset);
+			bottom.append(buttonSave);
+
+			// assembly color palette
+			$.each(colorSet.colors, function (i) {
+        		color = templates.color.clone();
+				color.css('background-color', colorSet.colors[i]);
+				palette.append(color);
+    		});
+
+			// set canvas pane width and height
+			var bcCanvas = rootElement.find('canvas');
+			var bcCanvasContainer = rootElement.find('#bcPaint-canvas-container');
+			bcCanvas.attr('width', bcCanvasContainer.width());
+			bcCanvas.attr('height', bcCanvasContainer.height());
+
+			// get canvas pane context
+			paintCanvas = document.getElementById('bcPaintCanvas');
+			paintContext = paintCanvas.getContext('2d');
+
+			// set color
+			$.fn.bcPaint.setColor(defaultColor);
+
+			// bind mouse actions
+			paintCanvas.onmousedown = $.fn.bcPaint.onMouseDown;
+			paintCanvas.onmouseup = $.fn.bcPaint.onMouseUp;
+			paintCanvas.onmousemove = $.fn.bcPaint.onMouseMove;
+		},
+
+		/**
+		* Remove pane
+		*/
+		removePane : function(){
+			$('#bcPaint-container').remove();
+		},
+
+		/**
 		* On mouse down
 		**/
-		paintMouseDown : function(e){
+		onMouseDown : function(e){
 			isDragged = true;
 			// get mouse x and y coordinates
 			startPoint.x = e.offsetX;
@@ -101,14 +131,14 @@ $(document).ready(function(){
 		/**
 		* On mouse up
 		**/
-		paintMouseUp : function() {
+		onMouseUp : function() {
 		    isDragged = false;
 		},
 
 		/**
 		* On mouse move
 		**/
-		paintMouseMove : function(e){
+		onMouseMove : function(e){
 			if(isDragged){
 				paintContext.lineTo(e.offsetX, e.offsetY);
 				paintContext.stroke();
@@ -116,10 +146,19 @@ $(document).ready(function(){
 		},
 
 		/**
-		*
+		* Set selected color
 		**/
 		setColor : function(color){
 			paintContext.strokeStyle = $.fn.bcPaint.toHex(color);
+		},
+
+		/**
+		*
+		*/
+		export : function(){
+			var imgData = paintCanvas.toDataURL('image/png');
+			var windowOpen = window.open('about:blank', 'Image');
+			windowOpen.document.write('<img src="' + imgData + '" alt="Exported Image"/>');
 		},
 
 		/**
@@ -159,7 +198,7 @@ $(document).ready(function(){
 	**/
 	$.fn.bcPaint.defaults = {
         // default color
-        defaultColor : "000000",
+        defaultColor : '000000',
 
         // default color set
         colors : [

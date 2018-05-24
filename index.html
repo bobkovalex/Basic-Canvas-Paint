@@ -5,25 +5,25 @@
 		<script type="text/javascript" src="resources/js/jquery.min.js"></script>
 		<script type="text/javascript" src="resources/js/bcPaint.js"></script>
 		<style type="text/css">
-			
+			*{
+			  margin: 0;
+			  padding: 0;
+			  list-style: none;
+			}
+
+			body{
+			  font-family: "proxima-nova-soft", "Proxima Nova Soft", Helvetica, Arial, sans-serif;
+			}
+
+			#bcPaint{
+			  width: 600px;
+			  height: 400px;
+			  margin: 20px auto;
+			}
 		</style>
 	</head>
 	<body>
-		<div id="bcPaint">
-			<!-- <div class="bcPaint-container">
-				<div class="bcPaint-header">
-					<div class="bcPaint-palette">
-						<div class="bcPaint-palette-color"></div>
-						<div class="bcPaint-palette-color"></div>
-						<div class="bcPaint-palette-color"></div>
-						<div class="bcPaint-palette-color"></div>
-					</div>
-				</div>
-				<div class="bcPaint-canvas-container">
-					<canvas id="bcPaintCanvas"></canvas>
-				</div>
-			</div> -->
-		</div>
+		<div id="bcPaint"></div>
 		<script type="text/javascript">
 			$('#bcPaint').bcPaint();
 		</script>
