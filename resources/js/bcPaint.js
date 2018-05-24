@@ -3,7 +3,7 @@
  * Copyright (c) 2018 Alex Bobkov <lilalex85@gmail.com>
  * Licensed under MIT
  * @author Alexandr Bobkov
- * @version 0.3.0
+ * @version 0.4.0
  */
 
 $(document).ready(function(){
@@ -106,6 +106,29 @@ $(document).ready(function(){
 			paintCanvas.onmousedown = $.fn.bcPaint.onMouseDown;
 			paintCanvas.onmouseup = $.fn.bcPaint.onMouseUp;
 			paintCanvas.onmousemove = $.fn.bcPaint.onMouseMove;
+
+			// bind touch actions
+			paintCanvas.addEventListener('touchstart', function(e){
+				$.fn.bcPaint.dispatchMouseEvent(e, 'mousedown');
+			});
+			paintCanvas.addEventListener('touchend', function(e){
+  				$.fn.bcPaint.dispatchMouseEvent(e, 'mouseup');
+			});
+			paintCanvas.addEventListener('touchmove', function(e){
+				$.fn.bcPaint.dispatchMouseEvent(e, 'mousemove');
+			});
+		},
+
+		dispatchMouseEvent : function(e, mouseAction){
+			var touch = e.touches[0];
+			if(touch == undefined){
+				touch = { clientX : 0, clientY : 0 };
+			}
+			var mouseEvent = new MouseEvent(mouseAction, {
+				clientX: touch.clientX,
+				clientY: touch.clientY
+			});
+			paintCanvas.dispatchEvent(mouseEvent);
 		},
 
 		/**
