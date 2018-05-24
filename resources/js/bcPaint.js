@@ -3,7 +3,7 @@
  * Copyright (c) 2018 Alex Bobkov <lilalex85@gmail.com>
  * Licensed under MIT
  * @author Alexandr Bobkov
- * @version 0.5.0
+ * @version 0.5.1
  */
 
 $(document).ready(function(){
@@ -120,17 +120,17 @@ $(document).ready(function(){
 
 			// Prevent scrolling on touch event
 			document.body.addEventListener("touchstart", function (e) {
-			  if (e.target == canvas) {
+			  if (e.target == 'paintCanvas') {
 			    e.preventDefault();
 			  }
 			}, false);
 			document.body.addEventListener("touchend", function (e) {
-			  if (e.target == canvas) {
+			  if (e.target == 'paintCanvas') {
 			    e.preventDefault();
 			  }
 			}, false);
 			document.body.addEventListener("touchmove", function (e) {
-			  if (e.target == canvas) {
+			  if (e.target == 'paintCanvas') {
 			    e.preventDefault();
 			  }
 			}, false);
