@@ -21,6 +21,11 @@
   margin: 0 5px;
 }
 
+#bcPaint-palette > .selected{
+  border: 2px solid #bdbdbd;
+  margin-bottom: -2px;
+}
+
 #bcPaint-canvas-container{
   width: 100%;
   height: calc(100% - 50px);

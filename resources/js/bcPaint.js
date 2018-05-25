@@ -3,11 +3,13 @@
  * Copyright (c) 2018 Alex Bobkov <lilalex85@gmail.com>
  * Licensed under MIT
  * @author Alexandr Bobkov
- * @version 0.7.1
+ * @version 0.7.2
  */
 
 $(document).ready(function(){
 	$('body').on('click', '.bcPaint-palette-color', function(){
+		$(this).parent().find('.selected').removeClass('selected');
+		$(this).addClass('selected');
 		$.fn.bcPaint.setColor($(this).css('background-color'));
 	});
 
@@ -239,8 +241,8 @@ $(document).ready(function(){
 
         // default color set
         colors : [
-					'000000', '993300', '333300', '000080', '333399', '333333',
-					'800000', 'FF6600', '808000', '008000', '008080', '0000FF'
+					'000000', '444444', '999999', 'DDDDDD', '6B0100', 'AD0200',
+					'6B5E00', 'FFE000', '007A22', '00E53F', '000884', '000FFF'
         ],
 
         // extend default set
