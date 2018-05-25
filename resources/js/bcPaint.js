@@ -3,7 +3,7 @@
  * Copyright (c) 2018 Alex Bobkov <lilalex85@gmail.com>
  * Licensed under MIT
  * @author Alexandr Bobkov
- * @version 0.6.0
+ * @version 0.7.0
  */
 
 $(document).ready(function(){
@@ -130,6 +130,9 @@ $(document).ready(function(){
 	**/
 	$.extend(true, $.fn.bcPaint, {
 
+		/**
+		* Dispatch mouse event
+		*/
 		dispatchMouseEvent : function(e, mouseAction){
 			var touch = e.touches[0];
 			if(touch == undefined){
@@ -147,7 +150,6 @@ $(document).ready(function(){
 		*/
 		clearCanvas : function(){
 			paintCanvas.width = paintCanvas.width;
-			//$('#bcPaint-container').remove();
 		},
 
 		/**
