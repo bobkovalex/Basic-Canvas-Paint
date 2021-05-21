@@ -1,8 +1,8 @@
 /**
  * Basic Canvas Paint
- * Copyright (c) 2018 Alex Bobkov <lilalex85@gmail.com>
+ * Copyright (c) 2018-2021 Alexandre Bobkov
  * Licensed under MIT
- * @author Alexandr Bobkov
+ * @author Alexandre Bobkov
  * @version 0.7.3
  */
 
