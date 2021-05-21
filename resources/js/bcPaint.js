@@ -30,15 +30,14 @@ $(document).ready(function(){
 	var isDragged		= false,
 		startPoint		= { x:0, y:0 },
 		templates 		= {
-							container 		: $('<div id="bcPaint-container"></div>'),
-							header 			: $('<div id="bcPaint-header"></div>'),
-							palette 		: $('<div id="bcPaint-palette"></div>'),
+							container 		: $('<div class="row" id="bcPaint-container"></div>'),
+							palette 		: $('<div class="col-sm-3 cols-md-3 bg-light rounded pt-4 text-center" id="bcPaint-palette"><h6 class="bg-dark rounded p-3 mb-4 text-white font-weight-normal">Color Palette</h6></div>'),
 							color 			: $('<div class="bcPaint-palette-color"></div>'),
-							canvasContainer : $('<div id="bcPaint-canvas-container"></div>'),
-							canvasPane 		: $('<canvas id="bcPaintCanvas"></canvas>'),
-							bottom 			: $('<div id="bcPaint-bottom"></div>'),
-							buttonReset 	: $('<button id="bcPaint-reset">Reset</button>'),
-							buttonSave		: $('<button id="bcPaint-export">Export</button>')
+							canvasContainer : $('<div class="col-sm-9 col-md-9" id="bcPaint-canvas-container"></div>'),
+							canvasPane 		: $('<canvas id="bcPaintCanvas" class="border border-dark rounded"></canvas>'),
+							bottom 			: $('<div class="col-sm-12 col-md-12 text-center mt-3" id="bcPaint-bottom"></div>'),
+							buttonReset 	: $('<button type="button" class="btn btn-secondary btn-sm mr-1" id="bcPaint-reset"><i class="fas fa-eraser"></i> Clear</button>'),
+							buttonSave		: $('<button type="button" class="btn btn-primary btn-sm ml-1" id="bcPaint-export"><i class="fas fa-download"></i> Export</button>')
 						},
 		paintCanvas,
 		paintContext;
@@ -53,7 +52,7 @@ $(document).ready(function(){
 				colorSet		= $.extend({}, $.fn.bcPaint.defaults, options),
 				defaultColor	= (rootElement.val().length > 0) ? rootElement.val() : colorSet.defaultColor,
 				container 		= templates.container.clone(),
-				header 			= templates.header.clone(),
+				// header 			= templates.header.clone(),
 				palette 		= templates.palette.clone(),
 				canvasContainer = templates.canvasContainer.clone(),
 				canvasPane 		= templates.canvasPane.clone(),
@@ -64,10 +63,11 @@ $(document).ready(function(){
 
 			// assembly pane
 			rootElement.append(container);
-			container.append(header);
+			// container.append(header);
+			container.append(palette);
 			container.append(canvasContainer);
 			container.append(bottom);
-			header.append(palette);
+			// header.append(palette);
 			canvasContainer.append(canvasPane);
 			bottom.append(buttonReset);
 			bottom.append(buttonSave);
@@ -241,8 +241,8 @@ $(document).ready(function(){
 
         // default color set
         colors : [
-					'000000', '444444', '999999', 'DDDDDD', '6B0100', 'AD0200',
-					'6B5E00', 'FFE000', '007A22', '00E53F', '000884', '000FFF'
+					'000000', '444444', '999999', 'DDDDDD', '#e83e8c', '#dc3545',
+					'#fd7e14', '#ffc107', '#28a745', '#20c997', '#6f42c1', '#007bff'
         ],
 
         // extend default set

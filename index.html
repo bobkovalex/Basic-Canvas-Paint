@@ -1,170 +1,109 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>Basic Canvas Paint</title>
-		<link type="text/css" rel="stylesheet" href="resources/css/bcPaint.css"/>
-		<link type="text/css" rel="stylesheet" href="resources/css/bcPaint.mobile.css"/>
-		<script type="text/javascript" src="resources/js/jquery.min.js"></script>
-		<script type="text/javascript" src="resources/js/bcPaint.js"></script>
-		<style type="text/css">
-			*{
-			  margin: 0;
-			  padding: 0;
-			  list-style: none;
-			}
 
-			body{
-			  font-family: "proxima-nova-soft", "Proxima Nova Soft", Helvetica, Arial, sans-serif;
-			  background-color: #f9f9f9;
-			}
+<head>
+	<title>Basic Canvas Paint | jQuery Plugin</title>
+	<link type="text/css" rel="stylesheet"
+		href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css" />
+	<link type="text/css" rel="stylesheet"
+		href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+	<link type="text/css" rel="stylesheet" href="resources/css/bcPaint.css" />
+	<link type="text/css" rel="stylesheet" href="resources/css/demo-page.css" />
+	<link type="text/css" rel="stylesheet" href="resources/css/bcPaint.mobile.css" />
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script type="text/javascript" src="resources/js/bcPaint.js"></script>
+</head>
 
-			#container{
-			  width: 100%;
-			  height: 100%;
-			  max-width: 960px;
-			  margin: auto;
-			  background-color: #ffffff;
-			  position: relative;
-			}
-
-			#container h5{
-			  font-size: 12px;
-			  font-weight: 400;
-			  text-transform: uppercase;
-			  margin-top: 40px;
-			  margin-bottom: 10px;
-			}
-
-			#container h4{
-			  font-size: 12px;
-			  font-weight: 300;
-			}
-
-			#container h3{
-			  font-size: 16px;
-			  font-weight: 400;
-			  margin: 10px 0;
-			}
-
-			#container > #header{
-			  background-color: #313131;
-			  color: #e8e8e8;
-			  text-align: center;
-			  width: 100%;
-			  padding: 45px 0;
-			}
-
-			#container > #middle{
-			  height: 310px;
-			  padding: 40px;
-			}
-
-			#container > #middle > #features{
-			  float: left;
-			  margin-top: -20px;
-			}
-
-			#container > #middle > #features > ul > li{
-			  font-size: 12px;
-			  font-weight: 300;
-			  margin-bottom: 7px;
-			  margin-left: 5px;
-			}
-
-			#container > #middle > #features > .code{
-			  font-size: 10px;
-			  font-weight: 300;
-			  color: #5a5a5a;
-			  border: 1px dashed #ddd;
-			  padding: 7px 30px 7px 10px;
-			}
-
-			#container > #middle > #features > a{
-			  color: #000;
-			  font-size: 10px;
-			}
-
-			#container > #middle > #bcPaint{
-			  width: 600px;
-			  height: 400px;
-			  float: right;
-			}
-
-			@media (max-width: 1024px){
-				body{
-					top: 0;
-					right: 0;
-					bottom: 0;
-					left: 0;
-					position: fixed;
-				}
-
-				#container{
-					background-color: #f7f7f7;
-				}
-
-				#container h4{
-					font-size: 18px;
-				}
-
-				#container h3{
-					font-size: 32px;
-					margin: 15px 0;
-				}
-
-				#container > #middle > #features{
-					display: none;
-				}
-
-				#container > #middle{
-					width: 100%;
-					height: calc(100% - 270px);
-					padding: 0;
-				}
-
-				#bcPaint{
-					width: 100% !important;
-					height: 100% !important;
-					margin: 0 !important;
-					background-color: #ffffff;
-				}
-			}
-		</style>
-	</head>
-	<body>
-		<div id="container">
-			<div id="header">
-				<h3>Basic Canvas Paint</h3>
-				<h4>Draw, E-Sign and Export</h4>
-			</div>
-			<div id="middle">
-				<div id="features">
-					<h5>Features</h5>
-					<ul>
-						<li>Pick a color</li>
-						<li>Draw</li>
-						<li>E-Sign</li>
-						<li>Export</li>
-						<li>Mobile support</li>
-					</ul>
-					<h5>Code Example</h5>
-					<div class="code">
-						&lt;div id="bcPaint"&gt;&lt;/div&gt;
-						</br>
-						&ltscript type="text/javascript"&gt;
-						</br>
-							$('#bcPaint').bcPaint();
-						</br>
-						&lt;/script&gt;
-					</div>
-					<h5>Website</h5>
-					<a href="https://github.com/bobkovalex/Basic-Canvas-Paint">https://github.com/bobkovalex/Basic-Canvas-Paint</a>
+<body>
+	<div class="jumbotron text-center bg-dark text-white">
+		<h1>Basic Canvas Paint</h1>
+		<p class="lead">A jQuery based plugin example for drawing, e-signing and exporting</p>
+	</div>
+	<section class="features">
+		<div class="container">
+			<div class="row pt-5 pb-5 text-center text-secondary">
+				<div class="col-sm-12 col-md-12">
+					Want to create a painting app or just curious on how-to drap in a webpage using JavaScript, then
+					this example is for you to start with.
+					This example is quite simple and basic, however you can be creative as you like. Enjoy (:
 				</div>
-				<div id="bcPaint"></div>
+			</div>
+			<div class="row pt-3 pb-5 text-center bg-light rounded features">
+				<div class="col-12 col-sm-6 col-md-4 mt-5">
+					<i class="fas fa-palette"></i>
+					<h4 class="pt-3">Color Palette</h4>
+					<p class="text-secondary">Select from various color or add your color</p>
+				</div>
+				<div class="col-12 col-sm-6 col-md-4 mt-5">
+					<i class="fas fa-pencil-ruler"></i>
+					<h4 class="pt-3">Free Hand Drawing</h4>
+					<p class="text-secondary">Draw anything within drawing pane</p>
+				</div>
+				<div class="col-12 col-sm-6 col-md-4 mt-5">
+					<i class="fas fa-signature"></i>
+					<h4 class="pt-3">E-Sign</h4>
+					<p class="text-secondary">It also can be used as e-signature for your online apps</p>
+				</div>
+				<div class="col-12 col-sm-6 col-md-4 mt-5">
+					<i class="fas fa-download"></i>
+					<h4 class="pt-3">Export</h4>
+					<p class="text-secondary">Export your drawnings into PNG image</p>
+				</div>
+				<div class="col-12 col-sm-6 col-md-4 mt-5">
+					<i class="fas fa-mobile-alt"></i>
+					<h4 class="pt-3">Mobile Support</h4>
+					<p class="text-secondary">It is mobile friendly, so you can use it on your tablet or smartphone</p>
+				</div>
+				<div class="col-12 col-sm-6 col-md-4 mt-5">
+					<i class="fab fa-safari"></i>
+					<h4 class="pt-3">Cross-Browser Support</h4>
+					<p class="text-secondary">Supported by all modern browser</p>
+				</div>
 			</div>
 		</div>
-
-		<script type="text/javascript">
-			$('#bcPaint').bcPaint();
-		</script>
+	</section>
+	<section class="example">
+		<div class="container mt-5 mb-5">
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 cols-md-12 text-center">
+					<h3>Try it Out</h3>
+				</div>
+			</div>
+			<div id="bcPaint"></div>
+			<script type="text/javascript">
+				$('#bcPaint').bcPaint();
+			</script>
+		</div>
+	</section>
+	<section class="snippet bg-light">
+		<div class="container mt-5 pt-3 pb-3">
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 cols-md-12 text-center">
+					<h3>Code Snippet</h3>
+				</div>
+				<code>
+					<pre class="text-secondary pt-4">
+&lt;div id="bcPaint"&gt;&lt;/div&gt;
+&ltscript type="text/javascript"&gt;
+	$('#bcPaint').bcPaint();
+&lt;/script&gt;
+					</pre>
+				</code>
+			</div>
+		</div>
+	</section>
+	<section class="footer bg-dark">
+		<div class="container pt-3 pb-3">
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-12 text-center">
+					<a href="https://github.com/bobkovalex/Basic-Canvas-Paint" class="text-white"><i class="fab fa-github"></i></a>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section class="copyrights text-secondary">
+		<div class="col-xs-12 col-sm-12 col-md-12 text-center pt-2 pb-2">
+			&copy; Alex Bobkov 2021. All Rights Reserved.
+		</div>
+	</section>
 </html>
