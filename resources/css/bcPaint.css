@@ -5,8 +5,28 @@
   cursor: pointer;
   border-radius: 5px;
   margin: 0 5px;
+	border: 1px #ccc solid;
 }
+.bcPaint-palette-stroke {
+	
+	background-color:#AAA;
+	display: inline-block;
+  	margin: 2px;
+	border: 2px #ccc solid;
+	border-radius: 15px;
 
-#bcPaint-palette > .selected { 
-  border: 2px solid #343a40;
+}
+#bcPaint-palette > .selectedColor { 
+  border: 2px solid #777;
+}
+#bcPaint-palette > .selectedStroke { 
+  border: 3px solid #777;
+}
+#bcPaint-palette {
+  width:1100px;
+}
+#bcPaint-canvas-container {
+	height:800px;
+	width:1100px;
+	border: 1px #ccc solid;
 }
