@@ -7,28 +7,6 @@
  * @version 0.8
  */
 
-$(document).ready(function(){
-	$('body').on('click', '.bcPaint-palette-color', function(){
-		$.fn.bcPaint.setColor($(this).data('color'));
-	});
-	$('body').on('click', '.bcPaint-palette-stroke', function(){
-		$.fn.bcPaint.setStroke($(this).data('stroke'));
-	});
-	$('body').on('click', '#bcPaint-eraser', function(){
-		$.fn.bcPaint.setEraser()
-	});
-	
-
-	$('body').on('click', '#bcPaint-reset', function(){
-		$.fn.bcPaint.clearCanvas();
-	});
-
-	$('body').on('click', '#bcPaint-export', function(){
-		$.fn.bcPaint.export();
-	});
-});
-
-
 (function( $ ) {
 	/**
 	* Private variables
@@ -99,7 +77,7 @@ $(document).ready(function(){
 				stroke.attr('data-stroke',strokeSet.strokes[i])
 				palette.append(stroke);
     		});
-			eraser.css("float","right");
+// 			eraser.css("float","right");
 			palette.append(eraser)
 			
 
@@ -150,6 +128,24 @@ $(document).ready(function(){
 			    e.preventDefault();
 			  }
 			}, false);
+			
+			// Palette events
+			palette.on('click', '.bcPaint-palette-color', function(){
+				$.fn.bcPaint.setColor($(this).data('color'));
+			});
+			palette.on('click', '.bcPaint-palette-stroke', function(){
+				$.fn.bcPaint.setStroke($(this).data('stroke'));
+			});
+			palette.on('click', '#bcPaint-eraser', function(){
+				$.fn.bcPaint.setEraser()
+			});
+			palette.on('click', '#bcPaint-reset', function(){
+				$.fn.bcPaint.clearCanvas();
+			});
+			palette.on('click', '#bcPaint-export', function(){
+				$.fn.bcPaint.export();
+			});
+
 		});
 	}
 
@@ -218,7 +214,7 @@ $(document).ready(function(){
 		* Set selected color, disable eraser
 		**/
 		setColor : function(color){
-			$('.bcPaint-palette-color.selectedColor').removeClass('selectedColor');
+			$('.selectedColor').removeClass('selectedColor');
 			$('.bcPaint-palette-color[data-color="'+color+'"]').addClass('selectedColor');
 			paintContext.strokeStyle = $.fn.bcPaint.toHex(color);
 			isEraser=false
@@ -236,6 +232,8 @@ $(document).ready(function(){
 		* enable eraser
 		**/
 		setEraser : function(){
+			$('.selectedColor').removeClass('selectedColor');
+			$('#bcPaint-eraser').addClass('selectedColor');
 			isEraser=!isEraser
 		},
 
